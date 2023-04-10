@@ -9,6 +9,7 @@ const MaxWorkingHrs =160;
 let totalemphrs =0;
 let totalworkingdays =0;
 empHrs =0;
+let empDailyWageArray = new Array();
 function gettingWorkingHours(EmpCheck)
 {
     switch(EmpCheck)
@@ -21,11 +22,18 @@ function gettingWorkingHours(EmpCheck)
             return 0;
     }
  }
+ function calculateDailyWage(empHrs)
+ {
+    return empHrs * WagePerHrs;
+ }
 while (totalemphrs <= MaxWorkingHrs && totalworkingdays < workingDayspermnth)
 {
     totalworkingdays++;
    let EmpCheck = (Math.floor(Math.random()*10 % 3))
-   totalemphrs += gettingWorkingHours(EmpCheck);
+   let empHrs = gettingWorkingHours(EmpCheck);
+   totalemphrs += empHrs;
+   empDailyWageArray.push(calculateDailyWage(empHrs))
 }
-let DailyEmpWage = totalemphrs * WagePerHrs;
+let DailyEmpWage = calculateDailyWage(totalemphrs);
 console.log("Total Number of hrs is  " + totalemphrs + " Total Number of days is " + totalworkingdays + " Daily Emp Wage is " + DailyEmpWage);
+console.log(empDailyWageArray)
